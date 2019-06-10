@@ -22,10 +22,14 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<Course> findAll() {
-        return courseRepository.findAll();
+        List<Course> courseList = courseRepository.findAll();
+       /* if (courseList.isEmpty()){
+            throw new DataNotFoundException(ExceptionConstant.COURSE_NOT_FOUND);
+        }*/
+        return courseList;
     }
 
-    @Override
+   @Override
     public Course findCourseById(String courseId) {
         return courseRepository.findById(courseId).orElseThrow(() -> new DataNotFoundException("Course not found"));
     }

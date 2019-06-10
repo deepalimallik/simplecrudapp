@@ -10,10 +10,10 @@ import java.util.Optional;
 public interface StudentService {
 
     List<Student> findAllStudent();
-    Student findStudentById(String studentId);
-    Student addStudent(Student student);
-    Student update(Student student, String studentId);
-    Student deleteById(Student student, String studentId);
+   Student findStudentById(String studentId);
+    void addStudent(Student student);
+    void update(Student student, String studentId);
+    void deleteById(Student student, String studentId);
 
 
 }

@@ -2,6 +2,7 @@ package com.logicabeans.simplecrudapp.controller;
 
 import com.logicabeans.simplecrudapp.model.Course;
 import com.logicabeans.simplecrudapp.service.CourseService;
+import com.logicabeans.simplecrudapp.service.serviceimpl.CourseServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/courses")
 public class CourseController {
+
 
     private final CourseService courseService;
 
@@ -31,9 +33,6 @@ public class CourseController {
     @GetMapping
     public  ResponseEntity<List<Course>> findAll(){
         List<Course> courseList = courseService.findAll();
-        if(courseList==null){
-            return new ResponseEntity<>(courseList, HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity<>(courseList, HttpStatus.OK);
     }
 

@@ -2,7 +2,7 @@ package com.logicabeans.simplecrudapp.model;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "")
 @Table(name="course")
 public class Course {
 
