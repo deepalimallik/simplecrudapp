@@ -9,9 +9,9 @@ import java.util.List;
 public interface TeacherService {
 
     List<Teacher> findAll();
-    Teacher findTeacherById(String teacherId);
+    Teacher findTeacherById(Long teacherId);
     Teacher addTeacher(Teacher teacher);
-    Teacher update(Teacher teacher, String teacherId);
-    Teacher deleteById(Teacher teacher, String teacherId);
+    void update(Teacher teacher, Long teacherId);
+    void deleteById(Teacher teacher, Long teacherId);
 
 }

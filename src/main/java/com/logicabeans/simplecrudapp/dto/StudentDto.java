@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 public class StudentDto {
 
 
-    private String studentId;
+    private Long studentId;
 
     private String StudentName;
 
@@ -20,11 +20,11 @@ public class StudentDto {
     public StudentDto() {
     }
 
-    public String getStudentId() {
+    public Long getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(String studentId) {
+    public void setStudentId(Long studentId) {
         this.studentId = studentId;
     }
 

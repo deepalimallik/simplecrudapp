@@ -8,8 +8,8 @@ public interface CourseDAO {
 
 
     List<Course> findAll();
-    Course findCourseById(String courseId);
+    Course findCourseById(Long courseId);
     Course addCourse(Course course);
-    Course update(Course course, String courseId);
-    Course deleteById(Course course, String courseId);
+    void update(Course course, Long courseId);
+    void deleteById(Course course, Long courseId);
 }

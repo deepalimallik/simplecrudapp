@@ -1,10 +1,12 @@
 package com.logicabeans.simplecrudapp.service.serviceimpl;
 
+import com.logicabeans.simplecrudapp.dao.TeacherDAO;
 import com.logicabeans.simplecrudapp.exception.DataNotFoundException;
 import com.logicabeans.simplecrudapp.model.Teacher;
 import com.logicabeans.simplecrudapp.repository.TeacherRepository;
 import com.logicabeans.simplecrudapp.service.TeacherService;
 import com.logicabeans.simplecrudapp.utils.ExceptionConstant;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,20 +15,23 @@ import java.util.Optional;
 @Service
 public class TeacherServiceImpl implements TeacherService {
 
-    private TeacherRepository teacherRepository;
+   /* private TeacherRepository teacherRepository;
 
     public TeacherServiceImpl(TeacherRepository teacherRepository) {
         this.teacherRepository = teacherRepository;
-    }
+    }*/
+
+    @Autowired
+    private TeacherDAO teacherDAO;
 
     @Override
     public List<Teacher> findAll() {
-        return teacherRepository.findAll();
+        return teacherDAO.findAll();
     }
 
     @Override
-    public Teacher findTeacherById(String teacherId) {
-        return teacherRepository.findById(teacherId).orElseThrow(() -> new DataNotFoundException("Teacher Not found"));
+    public Teacher findTeacherById(Long teacherId) {
+        return teacherDAO.findTeacherById(teacherId);
     }
 
     @Override
@@ -35,12 +40,12 @@ public class TeacherServiceImpl implements TeacherService {
         {
             throw new DataNotFoundException(ExceptionConstant.TEACHER_NOT_FOUND);
         }
-        return teacherRepository.save(teacher);
+        return teacherDAO.addTeacher(teacher);
     }
 
     @Override
-    public Teacher update(Teacher teacher, String teacherId) {
-        if(teacher==null || teacherId==null){
+    public void update(Teacher teacher, Long teacherId) {
+      /*  if(teacher==null || teacherId==null){
             throw  new DataNotFoundException(ExceptionConstant.TEACHER_NOT_FOUND);
         }
 
@@ -51,20 +56,24 @@ public class TeacherServiceImpl implements TeacherService {
         teacher1.get().setTeacherName(teacher.getTeacherName());
         teacher1.get().setAddress(teacher.getAddress());
         teacher1.get().setEmail(teacher.getEmail());
-        teacher1.get().setPhoneNumber(teacher.getPhoneNumber());
+        teacher1.get().setPhoneNumber(teacher.getPhoneNumber());*/
 
 
-        return teacherRepository.save(teacher1.get());
+      //  return teacherRepository.save(teacher1.get());
+         teacherDAO.update(teacher, teacherId);
     }
 
     @Override
-    public Teacher deleteById(Teacher teacher, String teacherId) {
-        if(teacherId==null){
+    public void deleteById(Teacher teacher, Long teacherId) {
+       /* if(teacherId==null){
             throw new DataNotFoundException(ExceptionConstant.TEACHER_NOT_FOUND);
         }
         Optional<Teacher> teacherOptional = teacherRepository.findById(teacherId);
         teacherRepository.delete(teacherOptional.get());
-        return teacherOptional.get();
+        return teacherOptional.get();*/
+
+       teacherDAO.deleteById(teacher,teacherId);
     }
+
 
 }

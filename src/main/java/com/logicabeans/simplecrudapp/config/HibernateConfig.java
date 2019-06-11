@@ -21,7 +21,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan(basePackages = { "com.logicabeans.simplecrudapp" })
 @EnableTransactionManagement
-@PropertySource(value={"classpath:application.properties"})
+//@PropertySource(value={"classpath:application.properties"})
 public class HibernateConfig {
 
     @Value("${spring.datasource.url}")

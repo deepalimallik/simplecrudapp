@@ -31,22 +31,23 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student findStudentById(String studentId) {
+    public Student findStudentById(Long studentId) {
         return studentDAO.findStudentById(studentId);
 
     }
 
     @Override
-    public void addStudent(Student student) {
+    public Student addStudent(Student student) {
         if(student==null){
             throw new DataNotFoundException(ExceptionConstant.STUDENT_NOT_FOUND);
         }
          studentDAO.addStudent(student);
+        return  student;
     }
 
 
     @Override
-    public void update(Student student, String studentId) {
+    public void update(Student student, Long studentId) {
       /*  if(student==null || studentId==null){
             throw new DataNotFoundException(ExceptionConstant.STUDENT_NOT_FOUND);
         }
@@ -66,7 +67,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void deleteById(Student student, String studentId) {
+    public void deleteById(Student student, Long studentId) {
       /* if(studentId==null){
            throw  new DataNotFoundException(ExceptionConstant.STUDENT_NOT_FOUND);
        }

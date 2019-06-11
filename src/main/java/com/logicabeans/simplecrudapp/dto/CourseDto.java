@@ -4,7 +4,7 @@ import com.logicabeans.simplecrudapp.model.Student;
 
 public class CourseDto {
 
-    private String courseId;
+    private Long courseId;
 
     private String courseName;
 
@@ -13,11 +13,11 @@ public class CourseDto {
     public CourseDto() {
     }
 
-    public String getCourseId() {
+    public Long getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
 

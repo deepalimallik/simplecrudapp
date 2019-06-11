@@ -5,7 +5,7 @@ import com.logicabeans.simplecrudapp.model.Student;
 
 public class TeacherDto {
 
-    private String teacherId;
+    private Long teacherId;
 
     private String teacherName;
 
@@ -22,11 +22,11 @@ public class TeacherDto {
     public TeacherDto() {
     }
 
-    public String getTeacherId() {
+    public Long getTeacherId() {
         return teacherId;
     }
 
-    public void setTeacherId(String teacherId) {
+    public void setTeacherId(Long teacherId) {
         this.teacherId = teacherId;
     }
 

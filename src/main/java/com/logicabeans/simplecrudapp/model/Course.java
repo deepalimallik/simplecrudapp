@@ -9,7 +9,7 @@ public class Course {
     @Id
     @Column(name="course_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String courseId;
+    private Long courseId;
 
     @Column(name="course_name")
     private String courseName;
@@ -25,18 +25,18 @@ public class Course {
     public Course() {
     }
 
-    public Course(String courseId, String courseName, Student student, Teacher teacher) {
+    public Course(Long courseId, String courseName, Student student, Teacher teacher) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.student = student;
         this.teacher = teacher;
     }
 
-    public String getCourseId() {
+    public Long getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
 

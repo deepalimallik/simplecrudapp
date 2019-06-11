@@ -1,19 +1,18 @@
 package com.logicabeans.simplecrudapp.daoImpl;
 
 import com.logicabeans.simplecrudapp.dao.StudentDAO;
+import com.logicabeans.simplecrudapp.dao.TeacherDAO;
 import com.logicabeans.simplecrudapp.model.Student;
-
+import com.logicabeans.simplecrudapp.model.Teacher;
+import com.logicabeans.simplecrudapp.repository.TeacherRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaUpdate;
-import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Repository
@@ -22,6 +21,16 @@ public class StudentDAOImpl implements StudentDAO {
 
     @PersistenceContext
     private EntityManager entityManager;
+/*
+    @Autowired
+    private TeacherRepository teacherRepository;
+    */
+
+    private TeacherDAO teacherDAO;
+
+    public StudentDAOImpl(TeacherDAO teacherDAO) {
+        this.teacherDAO = teacherDAO;
+    }
 //
 //    private final SessionFactory sessionFactory;
 //    Session session = null;
@@ -41,18 +50,30 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
    @Override
-    public Student findStudentById(String studentId) {
+    public Student findStudentById(Long studentId) {
       return entityManager.find(Student.class, studentId);
     }
 
     @Override
-    public void addStudent(Student student) {
+    public Student addStudent(Student student) {
+      /*  if(student.getTeacher()!=null) {
+            Optional<Teacher> teacher = teacherRepository.findById(student.getTeacher().getTeacherId());
+            if(teacher.isPresent()){
+                student.setTeacher(teacher.get());
+            }*/
+      if(student.getTeacher()!=null){
+          Teacher teacher = teacherDAO.findTeacherById(student.getTeacher().getTeacherId());
+          if(teacher!=null){
+              student.setTeacher(teacher);
+          }
+        }
 
          entityManager.persist(student);
+         return student;
     }
 
     @Override
-    public void update(Student student, String studentId) {
+    public void update(Student student, Long studentId) {
         /*CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaUpdate<Student> update = criteriaBuilder.createCriteriaUpdate(Student.class);
         Root studentRoot = update.from(Student.class);
@@ -79,11 +100,42 @@ public class StudentDAOImpl implements StudentDAO {
       entityManager.flush();
 */
 
-//    entityManager.createQuery("UPDATE Student s SET s.studentName = ");
+
+    //check if student exists
+
+ /*  entityManager.createQuery("UPDATE Student SET student_name = :name, student_address = :address, student_email= :email WHERE student_id = :id")
+           .setParameter("name", student.getStudentName())
+           .setParameter("address", student.getStudentAddress())
+           .setParameter("email", student.getStudentEmail())
+           .setParameter("id", studentId)
+           .executeUpdate();*/
+
+        Student student1 = entityManager.find(Student.class, studentId);
+        if(student.getStudentName()!=null) {
+            student1.setStudentName(student.getStudentName());
+        }
+        if(student.getStudentAddress()!=null) {
+            student1.setStudentAddress(student.getStudentAddress());
+        }
+        if(student.getStudentEmail()!=null) {
+            student1.setStudentEmail(student.getStudentEmail());
+        }
+        if(student.getTeacher()!=null) {
+          /* Optional<Teacher> teacher = teacherRepository.findById(student.getTeacher().getTeacherId());
+            if(teacher.isPresent()){
+                student1.setTeacher(teacher.get());
+            }*/
+            Teacher teacher = teacherDAO.findTeacherById(student.getTeacher().getTeacherId());
+            if(teacher!=null){
+                student1.setTeacher(teacher);
+            }
+        }
+        entityManager.persist(student1);
+
     }
 
     @Override
-    public void deleteById(String studentId) {
+    public void deleteById(Long studentId) {
         entityManager.remove(findStudentById(studentId));
     }
 }
