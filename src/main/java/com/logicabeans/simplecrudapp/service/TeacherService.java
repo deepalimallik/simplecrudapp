@@ -1,8 +1,6 @@
 package com.logicabeans.simplecrudapp.service;
 
 import com.logicabeans.simplecrudapp.model.Teacher;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 

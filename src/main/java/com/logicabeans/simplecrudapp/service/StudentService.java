@@ -1,10 +1,8 @@
 package com.logicabeans.simplecrudapp.service;
 
 import com.logicabeans.simplecrudapp.model.Student;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
+
 
 
 public interface StudentService {

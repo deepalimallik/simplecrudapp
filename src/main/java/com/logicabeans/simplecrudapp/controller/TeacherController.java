@@ -2,6 +2,7 @@ package com.logicabeans.simplecrudapp.controller;
 
 import com.logicabeans.simplecrudapp.model.Teacher;
 import com.logicabeans.simplecrudapp.service.TeacherService;
+import com.logicabeans.simplecrudapp.utils.RestAPIConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/teachers")
+@RequestMapping(RestAPIConstant.REST_TEACHER_URL)
 public class TeacherController {
 
     @Autowired
@@ -22,7 +23,7 @@ public class TeacherController {
     }
 
     @PostMapping
-    public ResponseEntity<Teacher> addTeacher(@RequestBody @Valid Teacher teacher){
+    public ResponseEntity<?> addTeacher(@RequestBody @Valid Teacher teacher){
         return new ResponseEntity<>(teacherService.addTeacher(teacher), HttpStatus.OK);
     }
 
@@ -34,30 +35,21 @@ public class TeacherController {
     }
 
     @GetMapping("/{teacherId}")
-    public ResponseEntity<Teacher> findTeacherById(@PathVariable Long teacherId){
+    public ResponseEntity<?> findTeacherById(@PathVariable Long teacherId){
         Teacher teacher2 = teacherService.findTeacherById(teacherId);
-     /*   if(teacher2==null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }*/
         return new ResponseEntity<>(teacher2, HttpStatus.OK);
     }
 
     @PutMapping("/{teacherId}")
-    public ResponseEntity<Teacher> update(@RequestBody @Valid Teacher teacher, @PathVariable Long teacherId){
+    public ResponseEntity<?> update(@RequestBody @Valid Teacher teacher, @PathVariable Long teacherId){
 
-       /* if(teacher3==null){
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }*/
         teacherService.update(teacher,teacherId);
         return new ResponseEntity<>(teacher, HttpStatus.OK);
     }
 
     @DeleteMapping("/{teacherId}")
-    public ResponseEntity<Teacher> deleteById(@RequestBody @Valid Teacher teacher, @PathVariable Long teacherId){
+    public ResponseEntity<?> deleteById(@RequestBody @Valid Teacher teacher, @PathVariable Long teacherId){
 
-       /* if(teacher4==null){
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }*/
         teacherService.deleteById(teacher, teacherId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

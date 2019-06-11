@@ -6,9 +6,6 @@ import com.logicabeans.simplecrudapp.dao.TeacherDAO;
 import com.logicabeans.simplecrudapp.model.Course;
 import com.logicabeans.simplecrudapp.model.Student;
 import com.logicabeans.simplecrudapp.model.Teacher;
-import com.logicabeans.simplecrudapp.repository.StudentRepository;
-import com.logicabeans.simplecrudapp.repository.TeacherRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

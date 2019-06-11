@@ -1,8 +1,6 @@
 package com.logicabeans.simplecrudapp.service;
 
 import com.logicabeans.simplecrudapp.model.Course;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 public interface CourseService {

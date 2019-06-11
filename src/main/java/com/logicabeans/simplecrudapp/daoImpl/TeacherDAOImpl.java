@@ -1,10 +1,7 @@
 package com.logicabeans.simplecrudapp.daoImpl;
-
 import com.logicabeans.simplecrudapp.dao.TeacherDAO;
 import com.logicabeans.simplecrudapp.model.Teacher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;

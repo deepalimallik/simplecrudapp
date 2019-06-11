@@ -2,6 +2,7 @@ package com.logicabeans.simplecrudapp.controller;
 
 import com.logicabeans.simplecrudapp.model.Student;
 import com.logicabeans.simplecrudapp.service.StudentService;
+import com.logicabeans.simplecrudapp.utils.RestAPIConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping(RestAPIConstant.REST_STUDENT_URL)
 public class StudentController {
 
 
@@ -39,13 +40,13 @@ public class StudentController {
     }
 
    @GetMapping("/{studentId}")
-    public ResponseEntity<Student> findStudentById(@PathVariable Long studentId){
+    public ResponseEntity<?> findStudentById(@PathVariable Long studentId){
         Student student2 = studentService.findStudentById(studentId);
         return ResponseEntity.ok(student2);
     }
 
     @PutMapping("/{studentId}")
-    public ResponseEntity<Student> update(@RequestBody  Student student, @PathVariable Long studentId){
+    public ResponseEntity<?> update(@RequestBody  Student student, @PathVariable Long studentId){
          studentService.update(student, studentId);
 
         return new ResponseEntity<>(student, HttpStatus.OK);
@@ -53,7 +54,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/{studentId}")
-    public ResponseEntity<Student> deleteById(@RequestBody @Valid Student student, @PathVariable Long studentId){
+    public ResponseEntity<?> deleteById(@RequestBody @Valid Student student, @PathVariable Long studentId){
         studentService.deleteById(student, studentId);
 
         return new ResponseEntity<>(HttpStatus.OK);
