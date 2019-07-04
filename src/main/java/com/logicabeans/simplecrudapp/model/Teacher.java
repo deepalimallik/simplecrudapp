@@ -7,8 +7,8 @@ import javax.persistence.*;
 public class Teacher {
 
     @Id
-    @Column(name="teacher_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="teacher_id", nullable = false, updatable = false)
     private Long teacherId;
 
     @Column(name="teacher_name")
@@ -22,7 +22,6 @@ public class Teacher {
 
     @Column(name="phone_number")
     private String phoneNumber;
-
 
     public Teacher() {
     }

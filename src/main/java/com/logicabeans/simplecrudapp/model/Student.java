@@ -10,7 +10,7 @@ public class Student {
 
     @Id
     @Column(name="student_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studentId;
 
     @Column(name="student_name")
@@ -22,7 +22,7 @@ public class Student {
     @Column(name="student_address")
     private String studentAddress;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name="teacher_id")
     private Teacher teacher;
 

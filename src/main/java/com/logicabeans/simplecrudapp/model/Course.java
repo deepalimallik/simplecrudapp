@@ -2,23 +2,23 @@ package com.logicabeans.simplecrudapp.model;
 
 import javax.persistence.*;
 
-@Entity(name = "")
+@Entity
 @Table(name="course")
 public class Course {
 
     @Id
     @Column(name="course_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
 
     @Column(name="course_name")
     private String courseName;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name="student_id")
     private Student student;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name="teacher_id")
     private Teacher teacher;
 

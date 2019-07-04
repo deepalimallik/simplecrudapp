@@ -1,8 +1,6 @@
 package com.logicabeans.simplecrudapp.config;
 
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -77,7 +75,8 @@ public class HibernateConfig {
         Properties properties = new Properties();
 
 //        properties.put("hibernate.dialect",environment.getRequiredProperty("spring.datasource.dialect"));
-        properties.put("hibernate.enable_lazy_load_no_trans",environment.getRequiredProperty("hibernate.enable_lazy_load_no_trans"));
+       properties.put("hibernate.enable_lazy_load_no_trans",environment.getRequiredProperty("hibernate.enable_lazy_load_no_trans"));
+        properties.put("hibernate.hbm2ddl.auto","update");
         return properties;
     }
 
