@@ -8,7 +8,6 @@ import com.logicabeans.simplecrudapp.utils.ExceptionConstant;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -32,6 +31,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student addStudent(Student student) {
+        //create mapper SERVICE
+//        Student student1 = studentMapper.dtoToEntity(studentDTO);
         if(student==null){
             throw new DataNotFoundException(ExceptionConstant.STUDENT_NOT_FOUND);
         }

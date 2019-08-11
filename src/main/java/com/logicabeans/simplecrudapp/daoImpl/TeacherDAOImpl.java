@@ -1,4 +1,5 @@
 package com.logicabeans.simplecrudapp.daoImpl;
+
 import com.logicabeans.simplecrudapp.dao.TeacherDAO;
 import com.logicabeans.simplecrudapp.model.Teacher;
 import org.springframework.stereotype.Repository;
@@ -49,7 +50,7 @@ public class TeacherDAOImpl implements TeacherDAO {
     }
 
     @Override
-    public void deleteById(Teacher teacher, Long teacherId) {
+    public void deleteById( Long teacherId) {
         entityManager.remove(findTeacherById(teacherId));
     }
 }

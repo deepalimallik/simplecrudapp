@@ -1,6 +1,6 @@
 package com.logicabeans.simplecrudapp.model;
 
-import org.springframework.stereotype.Controller;
+import com.logicabeans.simplecrudapp.dto.TeacherDto;
 
 import javax.persistence.*;
 
@@ -29,7 +29,7 @@ public class Student {
     public Student() {
     }
 
-    public Student(Long studentId, String studentName, String studentEmail, String studentAddress, Teacher teacher) {
+    public Student(Long studentId, String studentName, String studentEmail, Teacher teacher, String studentAddress) {
         this.studentId = studentId;
         this.studentName = studentName;
         this.studentEmail = studentEmail;

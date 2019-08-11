@@ -28,7 +28,6 @@ public class StudentController {
 
     @PostMapping
     public ResponseEntity<?> addStudent(@RequestBody @Valid Student student){
-
         return new ResponseEntity<>(studentService.addStudent(student),HttpStatus.OK);
     }
 

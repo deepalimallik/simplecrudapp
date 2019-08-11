@@ -1,6 +1,6 @@
 package com.logicabeans.simplecrudapp.controller;
 
-import com.logicabeans.simplecrudapp.model.Teacher;
+import com.logicabeans.simplecrudapp.dto.TeacherDto;
 import com.logicabeans.simplecrudapp.service.TeacherService;
 import com.logicabeans.simplecrudapp.utils.RestAPIConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,34 +23,34 @@ public class TeacherController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addTeacher(@RequestBody @Valid Teacher teacher){
+    public ResponseEntity<?> addTeacher(@RequestBody @Valid TeacherDto teacher){
         return new ResponseEntity<>(teacherService.addTeacher(teacher), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<Teacher>> findAll(){
-       List<Teacher> teacherList = teacherService.findAll();
+    public ResponseEntity<?> findAll(){
+       List<TeacherDto> teacherList = teacherService.findAll();
 
        return new ResponseEntity<>(teacherList, HttpStatus.OK);
     }
 
     @GetMapping("/{teacherId}")
     public ResponseEntity<?> findTeacherById(@PathVariable Long teacherId){
-        Teacher teacher2 = teacherService.findTeacherById(teacherId);
+        TeacherDto teacher2 = teacherService.findTeacherById(teacherId);
         return new ResponseEntity<>(teacher2, HttpStatus.OK);
     }
 
     @PutMapping("/{teacherId}")
-    public ResponseEntity<?> update(@RequestBody @Valid Teacher teacher, @PathVariable Long teacherId){
+    public ResponseEntity<?> update(@RequestBody @Valid TeacherDto teacherDto, @PathVariable Long teacherId){
 
-        teacherService.update(teacher,teacherId);
-        return new ResponseEntity<>(teacher, HttpStatus.OK);
+        teacherService.update(teacherDto,teacherId);
+        return new ResponseEntity<>(teacherDto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{teacherId}")
-    public ResponseEntity<?> deleteById(@RequestBody @Valid Teacher teacher, @PathVariable Long teacherId){
+    public ResponseEntity<?> deleteById(@PathVariable Long teacherId){
 
-        teacherService.deleteById(teacher, teacherId);
+        teacherService.deleteById(teacherId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

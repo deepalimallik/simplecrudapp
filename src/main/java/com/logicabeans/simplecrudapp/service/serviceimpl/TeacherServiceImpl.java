@@ -1,14 +1,16 @@
 package com.logicabeans.simplecrudapp.service.serviceimpl;
 
 import com.logicabeans.simplecrudapp.dao.TeacherDAO;
+import com.logicabeans.simplecrudapp.dto.TeacherDto;
 import com.logicabeans.simplecrudapp.exception.DataNotFoundException;
+import com.logicabeans.simplecrudapp.mapper.TeacherMapper;
 import com.logicabeans.simplecrudapp.model.Teacher;
 import com.logicabeans.simplecrudapp.service.TeacherService;
 import com.logicabeans.simplecrudapp.utils.ExceptionConstant;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -20,32 +22,38 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public List<Teacher> findAll() {
-        return teacherDAO.findAll();
+    public List<TeacherDto> findAll() {
+        List<TeacherDto> teacherDtos = teacherDAO.findAll().stream().map(teacher -> TeacherMapper.mapToDto(teacher)).collect(Collectors.toList());
+       return teacherDtos;
     }
 
     @Override
-    public Teacher findTeacherById(Long teacherId) {
-        return teacherDAO.findTeacherById(teacherId);
+    public TeacherDto findTeacherById(Long teacherId) {
+        Teacher teacher = teacherDAO.findTeacherById(teacherId);
+        return TeacherMapper.mapToDto(teacher);
     }
 
     @Override
-    public Teacher addTeacher(Teacher teacher) {
-        if(teacher==null)
+    public TeacherDto addTeacher(TeacherDto teacherDto) {
+        Teacher teacher1 = teacherDAO.addTeacher(TeacherMapper.mapToEntity(teacherDto));
+        if(teacher1==null)
         {
             throw new DataNotFoundException(ExceptionConstant.TEACHER_NOT_FOUND);
         }
-        return teacherDAO.addTeacher(teacher);
+        return TeacherMapper.mapToDto(teacher1);
     }
 
     @Override
-    public void update(Teacher teacher, Long teacherId) {
-         teacherDAO.update(teacher, teacherId);
+    public void update(TeacherDto teacherDto, Long teacherId) {
+
+        Teacher teacher = TeacherMapper.mapToEntity(teacherDto);
+        teacherDAO.update(teacher, teacherId);
+
     }
 
     @Override
-    public void deleteById(Teacher teacher, Long teacherId) {
-       teacherDAO.deleteById(teacher,teacherId);
+    public void deleteById(Long teacherId) {
+        teacherDAO.deleteById(teacherId);
     }
 
 

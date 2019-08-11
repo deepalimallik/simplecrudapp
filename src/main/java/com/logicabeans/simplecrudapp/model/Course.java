@@ -1,5 +1,7 @@
 package com.logicabeans.simplecrudapp.model;
 
+import com.logicabeans.simplecrudapp.dto.TeacherDto;
+
 import javax.persistence.*;
 
 @Entity

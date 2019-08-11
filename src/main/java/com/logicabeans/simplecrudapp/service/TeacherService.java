@@ -1,15 +1,16 @@
 package com.logicabeans.simplecrudapp.service;
 
+import com.logicabeans.simplecrudapp.dto.TeacherDto;
 import com.logicabeans.simplecrudapp.model.Teacher;
 import java.util.List;
 
 
 public interface TeacherService {
 
-    List<Teacher> findAll();
-    Teacher findTeacherById(Long teacherId);
-    Teacher addTeacher(Teacher teacher);
-    void update(Teacher teacher, Long teacherId);
-    void deleteById(Teacher teacher, Long teacherId);
+    List<TeacherDto> findAll();
+    TeacherDto findTeacherById(Long teacherId);
+    TeacherDto addTeacher(TeacherDto teacherDto);
+    void update(TeacherDto teacherDto, Long teacherId);
+    void deleteById( Long teacherId);
 
 }
